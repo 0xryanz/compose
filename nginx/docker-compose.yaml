@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  web:
+    image: nginx:stable-alpine
+    hostname: nginx
+    volumes:
+      - ${DOCKER_VOLUME_STORAGE:-/mnt/docker-volumes}/nginx/www-data:/var/www
+      - ${DOCKER_VOLUME_STORAGE:-/mnt/docker-volumes}/nginx/nginx-conf:/etc/nginx/conf.d
+      - ${DOCKER_VOLUME_STORAGE:-/mnt/docker-volumes}/nginx/logs:/var/log/nginx
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 8080:80
